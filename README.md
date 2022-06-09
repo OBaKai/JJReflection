@@ -5,6 +5,12 @@
 
 ## 依赖
 ```groovy
+   allprojects {
+	repositories {
+		maven { url 'https://www.jitpack.io' }
+	}
+   }	
+
     dependencies {
         implementation 'com.github.OBaKai:JJReflection:1.0'
     }
