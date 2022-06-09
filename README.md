@@ -245,3 +245,12 @@ DexFile domain赋值逻辑：
 	  	return Domain::kApplication;
 ```
 
+
+## 参考
+
+[FreeReflection](https://github.com/tiann/FreeReflection)
+
+[Android 11 绕过反射限制](https://www.jianshu.com/p/6546ce67c8e0)
+
+[安卓hiddenapi访问绝技](https://bbs.pediy.com/thread-268936.htm)
+
