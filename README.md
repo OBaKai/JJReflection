@@ -5,7 +5,7 @@
 
 ## 依赖
 ```groovy
-	dependencies {
+    dependencies {
         implementation 'com.github.OBaKai:JJReflection:1.0'
     }
 ```
