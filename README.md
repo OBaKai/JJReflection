@@ -1,3 +1,10 @@
+# JJReflection - 主要作用就在android9.0之后 突破 Hidden Api 限制
+ * 支持android9-12
+ * 采用策略：System.loadLibrary + native线程 两种方式
+ * 优先使用System.loadLibrary方式，如果失败了则追加使用native线程方式
+
+
+# Hidden Api限制分析
 ## Android9+
 
 ### 原因
