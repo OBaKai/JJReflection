@@ -3,6 +3,18 @@
  * 采用策略：System.loadLibrary + native线程 两种方式
  * 优先使用System.loadLibrary方式，如果失败了则追加使用native线程方式
 
+## 依赖
+```groovy
+	dependencies {
+	        implementation 'com.github.OBaKai:JJReflection:Tag'
+	}
+```
+
+## 使用
+```java
+    JJReflection.apiExemptions();
+```
+
 
 # Hidden Api限制分析
 ## Android9+
