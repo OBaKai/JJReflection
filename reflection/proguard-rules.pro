@@ -1,0 +1,2 @@
+-dontwarn com.llk.reflection.**
+-keep class com.llk.reflection.** {*;}
