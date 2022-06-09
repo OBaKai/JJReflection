@@ -6,8 +6,8 @@
 ## 依赖
 ```groovy
 	dependencies {
-	        implementation 'com.github.OBaKai:JJReflection:Tag'
-	}
+        implementation 'com.github.OBaKai:JJReflection:1.0'
+    }
 ```
 
 ## 使用
