@@ -13,6 +13,8 @@ typedef union {
  * 带@libcore.api.CorePlatformApi注解了，domain应该是被修饰成 corePlatform ？？？？
  */
 bool api_exemptions_from_VMRuntime(JNIEnv* env) {
+    ALOGD("exe api_exemptions_from_VMRuntime.");
+
     //android11之后 VMRuntime 带@libcore.api.CorePlatformApi注解了，domain应该是被修饰成 corePlatform 了
     jclass vmRuntime_Class = env->FindClass("dalvik/system/VMRuntime");
     if (vmRuntime_Class == nullptr) {
@@ -73,6 +75,16 @@ bool api_exemptions_from_VMRuntime(JNIEnv* env) {
  * 通过ZygoteInit类的方法 进行割免操作
  */
 bool api_exemptions_from_ZygoteInit(JNIEnv* env) {
+    ALOGD("exe api_exemptions_from_ZygoteInit.");
+
+    //不知道为什么android12 ZygoteInit#setApiDenylistExemptions 获取会崩溃
+    //有空再看看吧，这里直接返回false，然后让VMRuntime进行割免
+    int android_api_ = android_get_device_api_level();
+    if (android_api_ > __ANDROID_API_R__){
+        ALOGI("api over android11，don't exe api_exemptions_from_ZygoteInit.");
+        return false;
+    }
+
     //这里使用ZygoteInit里的方法，内部也是调用 VMRuntime#setHiddenApiExemptions
     jclass zygoteInitClass = env->FindClass("com/android/internal/os/ZygoteInit");
     if (zygoteInitClass == nullptr) {
@@ -85,14 +97,14 @@ bool api_exemptions_from_ZygoteInit(JNIEnv* env) {
     jmethodID apiExemptionsMethod = env->GetStaticMethodID(zygoteInitClass,
                                                            "setApiBlacklistExemptions",
                                                            "([Ljava/lang/String;)V");
-    if (apiExemptionsMethod == nullptr) {
-        ALOGE("setApiBlacklistExemptions method not found.");
-
-        //ZygoteInit#setApiDenylistExemptions（android12）
-        apiExemptionsMethod = env->GetStaticMethodID(zygoteInitClass,
-                                                     "setApiDenylistExemptions",
-                                                     "([Ljava/lang/String;)V");
-    }
+//    if (apiExemptionsMethod == nullptr) {
+//        ALOGE("setApiBlacklistExemptions method not found.");
+//
+//        //ZygoteInit#setApiDenylistExemptions（android12）
+//        apiExemptionsMethod = env->GetStaticMethodID(zygoteInitClass,
+//                                                     "setApiDenylistExemptions",
+//                                                     "([Ljava/lang/String;)V");
+//    }
 
     if (apiExemptionsMethod == nullptr) {
         ALOGE("setApiDenylistExemptions method not found.");
