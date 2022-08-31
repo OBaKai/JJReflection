@@ -12,7 +12,7 @@
    }	
 
     dependencies {
-        implementation 'com.github.OBaKai:JJReflection:1.0'
+        implementation 'com.github.OBaKai:JJReflection:1.1'
     }
 ```
 
